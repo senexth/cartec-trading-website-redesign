@@ -1,0 +1,30 @@
+---
+import '@fontsource-variable/plus-jakarta-sans';
+import '../styles/global.css';
+import '@fontsource-variable/raleway';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Cartec Trading | Automotive Workshop Equipment & Solutions',
+  description = 'Cartec Trading supplies weighing solutions, cold storage & display, and commercial kitchen equipment to trusted brands across Sri Lanka.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="antialiased">
+    <slot />
+  </body>
+</html>

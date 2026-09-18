@@ -1,0 +1,149 @@
+
+---
+const divisions = [
+  {
+    title: 'Weighing Solutions',
+    description:
+      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque',
+    backgroundImage: '/car background.svg',
+    overlayImage: '/DIGI.svg',
+  },
+  {
+    title: 'Cold Storage & Display',
+    description:
+      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque',
+    backgroundImage: '/G wagon background.jpg',
+    overlayImage: '/Autop.svg',
+  },
+  {
+    title: 'Commercial Kitchen & Food Preperation Equipment',
+    description:
+      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque',
+    backgroundImage: '/car background.svg',
+    overlayImage: '/IPC Portotecnica.svg',
+  },
+];
+
+const stepCount = divisions.length;
+---
+
+<section id="about" class="relative" style={`height: ${(stepCount + 1) * 100}vh`}>
+  <div class="sticky top-0 flex h-screen items-center overflow-hidden">
+  <div class="plus-bg-red pointer-events-none absolute inset-0" aria-hidden="true"></div>
+
+  <div class="relative mx-auto grid h-full max-w-6xl grid-cols-1 items-center gap-14 px-6 lg:grid-cols-2 lg:gap-10">
+      <div>
+        <h2 class="font-raleway text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+          Cartec <span class="font-raleway text-brand-blue">Sub-Divisions</span>
+        </h2>
+        <p class="mt-2 text-lg text-muted">Sample sub-heading text</p>
+
+        <ul class="mt-10 space-y-8">
+          {divisions.map((division, i) => (
+            <li
+              class:list={['sub-item', 'border-l-2', 'pl-5', { active: i === 0 }]}
+              data-step={i}
+              data-bg={division.backgroundImage}
+              data-overlay={division.overlayImage}
+            >
+              <h3 class="sub-item-title text-lg font-bold text-ink">{division.title}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-body">{division.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+     <div class="relative h-full w-full overflow-hidden">
+      <img
+        id="division-bg"
+        src={divisions[0].backgroundImage}
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover"
+        aria-hidden="true"
+      />
+
+      <div class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white to-transparent" aria-hidden="true"></div>
+
+      <img
+        id="division-overlay"
+        src={divisions[0].overlayImage}
+        alt="Featured partner"
+        class="absolute left-1/2 top-1/2 w-56 -translate-x-1/2 -translate-y-1/2 sm:w-64"
+      />
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+  const section = document.getElementById('about');
+  const items = document.querySelectorAll('.sub-item');
+  const bgImage = document.getElementById('division-bg');
+  const overlayImage = document.getElementById('division-overlay');
+
+  if (section && items.length) {
+    const stepCount = items.length;
+    let currentStep = 0;
+
+    function activate(index) {
+      items.forEach((el) => el.classList.remove('active'));
+      const item = items[index];
+      item.classList.add('active');
+
+      bgImage.src = item.getAttribute('data-bg');
+      overlayImage.src = item.getAttribute('data-overlay');
+    }
+
+    window.addEventListener('scroll', () => {
+      const rect = section.getBoundingClientRect();
+      
+      const scrolledPast = -rect.top;
+      const scrollableDistance = section.offsetHeight - window.innerHeight;
+      
+      let progress = scrolledPast / scrollableDistance;
+      progress = Math.max(0, Math.min(1, progress));
+
+      let step = Math.floor(progress * stepCount);
+      step = Math.min(step, stepCount - 1);
+
+      if (step !== currentStep) {
+        currentStep = step;
+        activate(step);
+      }
+    });
+  }
+</script>
+
+<style>
+  .plus-bg-red {
+    background-image: url('/Plus_symbol.svg.webp');
+    background-repeat: repeat;
+    background-size: 63px 63px;
+    opacity: 0.03;
+  }
+
+  .sub-item {
+    border-color: #e6e6ea;
+    transition: border-color 0.3s ease, text-shadow 0.3s;
+  }
+
+  .sub-item-title {
+    transition: text-shadow 0.3s;
+  }
+
+  .sub-item.active {
+    border-color: #e62117;
+  }
+
+  .sub-item.active .sub-item-title {
+    color: #111111;
+    font-weight: 800;
+  }
+
+  #division-bg,
+  #division-overlay {
+    transition: opacity 0.3s ease;
+  }
+</style>
+
+

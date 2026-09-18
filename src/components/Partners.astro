@@ -1,0 +1,51 @@
+---
+const partners = [
+  { name: 'Autop Stenhøj', logo: '/Autop.svg' },
+  { name: 'Yamada', logo: '/Yamada.svg' },
+  { name: 'Stenhøj', logo: '/Stenhoj.svg' },
+  { name: 'Heshbon', logo: '/Heshbon.svg' },
+  { name: 'Big Red Jacks', logo: '/Big Red Jacks.svg' },
+  { name: 'Big Red Jacks', logo: '/Big Red Jacks.svg' },
+  { name: 'IPC Portotecnica', logo: '/IPC Portotecnica.svg' },
+  { name: 'Interpump Group', logo: '/Interpump Group.svg' },
+  { name: 'IPC Portotecnica', logo: '/IPC Portotecnica.svg' },
+];
+---
+
+<section id="products" class="relative overflow-hidden py-20 lg:py-28">
+
+  <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,transparent_20%,rgba(230,33,23,0.08)_30%,transparent_80%)]" aria-hidden="true"></div>
+
+  <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_70%_at_100%_100%,_rgba(230,33,23,0.12),_transparent_80%)]" aria-hidden="true"></div>
+
+  <div class="plus-bg pointer-events-none absolute inset-0" aria-hidden="true"></div>
+
+  <div class="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-16">
+    <div>
+      <h2 class="font-raleway text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+        Our <span class="font-raleway bg-gradient-to-r from-[#3B5998] to-[#010816] bg-clip-text text-transparent">Partners</span>
+      </h2>
+      <p class="mt-2 text-lg text-muted">Sample sub-heading text</p>
+    </div>
+
+    <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+      {partners.map((partner) => (
+        <li class="flex aspect-[3/2] items-center justify-center rounded-xl border border-hairline bg-white p-4 shadow-sm">
+          <img src={partner.logo} alt={partner.name} class="h-full w-full object-contain" />
+        </li>
+      ))}
+    </ul>
+  </div>
+  
+  
+
+</section>
+
+<style>
+ .plus-bg {
+  background-image: url('/Plus_symbol.svg.webp');
+  background-repeat: repeat;
+  background-size: 63px 63px;
+  opacity: 0.03;
+  }
+</style>
