@@ -1,93 +1,137 @@
 ﻿---
-// Set this to your YouTube video ID — the part after "v=" in the URL,
-// e.g. for https://www.youtube.com/watch?v=dQw4w9WgXcQ the ID is "dQw4w9WgXcQ"
-const youtubeId = 't9-cMiEDNyk';
-const thumbnailUrl = `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`;
+const divisions = [
+  {
+    title: 'Workshop equipment',
+    description:
+      'Equip your workshop with dependable, professional grade solutions built for precision, productivity, and long-term performance.',
+    image: '/car background.svg',
+  },
+  {
+    title: 'Service center equipment',
+    description:
+      'Streamline vehicle servicing with reliable equipment designed for accuracy, efficiency, and a better service experience.',
+    image: '/car rapair.avif',
+  },
+  {
+    title: 'Body shop equipment',
+    description:
+      'Professional solutions for body repair and refinishing, helping you deliver precise workmanship and quality results every time.',
+    image: 'public/full-body-paint.jpg',
+  },
+];
 ---
 
-<section id="home" class="relative overflow-hidden">
-  <div
-  class="pointer-events-none absolute -top-40 left-1/3 h-[700px] w-[120px] -translate-x-1/2 rounded-full bg-[#E62117] rotate-[35deg] opacity-40 blur-[130px]"
-  aria-hidden="true"
-></div>
+<section id="home" class="px-4 pb-6 lg:px-8">
+  <div class="mx-auto grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-2">
 
-<div
-  class="pointer-events-none absolute -top-40 left-1/4 h-[700px] w-[100px] -translate-x-1/2 rounded-full bg-[#010816] rotate-[35deg] opacity-30 blur-[150px]"
-  aria-hidden="true"
-></div>
+    <!-- Left card -->
+    <div class="flex flex-col justify-between rounded-2xl bg-white p-8 lg:p-10">
+      <div>
+        <h1 class="text-3xl font-medium leading-tight text-ink sm:text-4xl">
+          Workshop Equipment
+        </h1>
+        <h2 class="text-3xl font-extrabold leading-tight text-ink/40 sm:text-4xl">
+          You Can Count On
+        </h2>
+        <p class="mt-4 max-w-md text-sm leading-relaxed text-body">
+          Vehicle lifts, cleaning systems, tyre machinery and professional
+          tools - serving Sri Lanka's workshops since 1999.
+        </p>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <a href="/contact" class="rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-800">
+            Contact Us
+          </a>
+          <a href="/products" class="rounded-full border border-ink/20 px-5 py-2.5 text-sm font-semibold text-ink hover:border-ink/40">
+            View our products
+          </a>
+        </div>
+      </div>
 
-  <div class="relative mx-auto max-w-4xl px-6 pb-16 pt-10 text-center lg:pb-24 lg:pt-16">
-    <h1 class="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
-      Sample Heading Text
-    </h1>
-    <p class="mt-3 text-xl font-medium text-muted sm:text-2xl">
-      Sample sub-heading text
-    </p>
-    <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-body">
-      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-      doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-      veritatis et quasi architecto beatae
-    </p>
+      
 
-    <div class="mt-8 flex items-center justify-center gap-4">
-      <a href="#contact" class="rounded-pill border border-brand-red px-7 py-3 text-sm font-semibold text-brand-red transition-colors hover:bg-brand-red hover:text-white">Contact Us</a>
-      <a href="#contact" class="rounded-pill bg-brand-blue px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-blue-dark">Contact Us</a>
+      <ul class="mt-10 space-y-3">
+        {
+          divisions.map((division, index) => (
+            <li>
+              <button
+                type="button"
+                class="division-card w-full rounded-xl border border-ink/10 px-5 py-3.5 text-left"
+                data-index={index}
+              >
+                <span class="block text-sm font-bold">{division.title}</span>
+                <span class="mt-1 block text-xs leading-relaxed opacity-70">
+                  {division.description}
+                </span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
     </div>
-  </div>
 
-  <div class="relative mx-auto max-w-6xl px-6 pb-16 lg:pb-24">
-    <div
-      id="video-showcase"
-      class="group relative h-[500px] cursor-pointer overflow-hidden rounded-2xl bg-brand-charcoal shadow-xl"   
-      data-youtube-id={youtubeId}
-      role="button"
-      tabindex="0"
-      aria-label="Play showcase video"
-    >
-      <img
-        src={thumbnailUrl}
-        alt="Showcase video thumbnail"
-        class="absolute inset-0 h-full w-full object-cover"
-        loading="lazy"
-      />
-      <div class="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/35" aria-hidden="true"></div>
+    <!-- Right: image showcase -->
+    <div class="relative min-h-[420px] overflow-hidden rounded-2xl bg-black lg:min-h-0">
+      {
+        divisions.map((division, index) => (
+          <img
+            src={division.image}
+            alt={division.title}
+            class="hero-image absolute inset-0 h-full w-full object-cover"
+            data-index={index}
+          />
+        ))
+      }
 
-      <span
-        class="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand-red shadow-lg shadow-black/30 transition-transform group-hover:scale-105"
-      >
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-          <path d="M6 4.5v13l12-6.5-12-6.5Z" fill="white" />
-        </svg>
-      </span>
+      <div class="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-1.5">
+        {
+          divisions.map((_, index) => (
+            <span class="dot h-1.5 w-1.5 rounded-full bg-white/40" data-index={index} />
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
 
-<script>
-  function initVideoShowcase() {
-    const container = document.getElementById('video-showcase');
-    if (!container) return;
-
-    const play = () => {
-      const id = container.dataset.youtubeId;
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
-      iframe.title = 'Showcase video';
-      iframe.className = 'absolute inset-0 h-full w-full';
-      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-      iframe.setAttribute('allowfullscreen', 'true');
-      iframe.setAttribute('frameborder', '0');
-      container.replaceChildren(iframe);
-    };
-
-    container.addEventListener('click', play);
-    container.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        play();
-      }
-    });
+<style>
+  .division-card.active {
+    background: black;
+    color: white;
   }
 
-  initVideoShowcase();
+  .hero-image {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .hero-image.active {
+    opacity: 1;
+  }
+
+  .dot {
+    transition: all 0.2s ease;
+  }
+  .dot.active {
+    width: 1rem;
+    background: white;
+  }
+</style>
+
+<script>
+  const cards = document.querySelectorAll('.division-card');
+
+  function activate(index: string) {
+    // clear every active class, then set the ones matching this index
+    document.querySelectorAll('.active').forEach((el) => el.classList.remove('active'));
+
+    document.querySelector(`.division-card[data-index="${index}"]`)?.classList.add('active');
+    document.querySelector(`.hero-image[data-index="${index}"]`)?.classList.add('active');
+    document.querySelector(`.dot[data-index="${index}"]`)?.classList.add('active');
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener('mouseenter', () => activate(card.getAttribute('data-index')!));
+  });
+
+  // start with the first card active
+  activate('0');
 </script>

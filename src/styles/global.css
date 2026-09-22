@@ -37,6 +37,6 @@
   body {
     font-family: var(--font-sans);
     color: var(--color-ink);
-    background-color: var(--color-surface);
+    background-color: #f2f2f2
   }
 }

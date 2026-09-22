@@ -1,16 +1,26 @@
 ---
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About us', href: '#about' },
-  { label: 'Products', href: '#products' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Products', href: '/products' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'News', href: '/news' },
+  { label: 'Services', href: '/services' },
 ];
+
+const currentPath = Astro.url.pathname;
+
+const isActive = (href: string) => {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+};
 ---
 
-<header class="relative z-20">
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
-    <a href="#home" class="flex items-center gap-2" aria-label="Cartec Trading home">
+<header class="relative z-20 px-4 py-4 lg:px-8">
+  <div
+    class="mx-auto flex max-w-7xl items-center justify-between rounded-2xl bg-white px-90 py-0.5 shadow-sm lg:px-8"
+  >
+    <a href="/" class="flex items-center gap-2" aria-label="Cartec Trading home">
       <img src="/image 1.svg" alt="Cartec Trading" class="h-auto w-36" />
     </a>
 
@@ -18,7 +28,11 @@ const navLinks = [
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="text-sm font-medium text-ink/80 transition-colors hover:text-brand-blue"
+          class={
+            isActive(link.href)
+              ? 'text-sm font-bold text-black transition-colors'
+              : 'text-sm font-medium text-ink/60 transition-colors hover:text-black'
+          }
         >
           {link.label}
         </a>
@@ -26,13 +40,10 @@ const navLinks = [
     </nav>
 
     <a
-      href="#contact"
-      class="hidden items-center gap-2 rounded-pill bg-brand-blue px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-blue-dark lg:inline-flex"
+      href="/contact"
+      class="hidden items-center gap-2 rounded-full bg-black px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800 lg:inline-flex"
     >
-      Contact
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <path d="M3.5 8h9M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
+      Contact Us
     </a>
 
     <button
