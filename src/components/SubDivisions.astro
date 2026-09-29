@@ -1,149 +1,140 @@
-
 ---
-const divisions = [
-  {
-    title: 'Weighing Solutions',
-    description:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque',
-    backgroundImage: '/car background.svg',
-    overlayImage: '/DIGI.svg',
-  },
-  {
-    title: 'Cold Storage & Display',
-    description:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque',
-    backgroundImage: '/G wagon background.jpg',
-    overlayImage: '/Autop.svg',
-  },
-  {
-    title: 'Commercial Kitchen & Food Preperation Equipment',
-    description:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque',
-    backgroundImage: '/car background.svg',
-    overlayImage: '/IPC Portotecnica.svg',
-  },
+const clients = [
+  { name: 'Jaguar', logo: '/Jaguar-Logo-PNG 1.svg' },
+  { name: 'Toyota', logo: '/toyota-logo-png-30 1.svg' },
+  { name: 'Dimo', logo: '/DIMO-Logo-1-removebg-preview 1.svg' },
+  { name: 'Land Rover', logo: '/landrover.svg' },
+  { name: 'DPMC', logo: '/DPMC.svg' },
+  { name: 'Sunshine', logo: '/sunshine.svg' },
 ];
 
-const stepCount = divisions.length;
+
+const decorSquares = Array.from({ length: 12 });
 ---
 
-<section id="about" class="relative" style={`height: ${(stepCount + 1) * 100}vh`}>
-  <div class="sticky top-0 flex h-screen items-center overflow-hidden">
-  <div class="plus-bg-red pointer-events-none absolute inset-0" aria-hidden="true"></div>
+<section class="px-4 py-10 lg:px-8">
+  <div class="mx-auto grid max-w-7xl  gap-3 lg:grid-cols-[minmax(0,540px)_1fr]">
+    
+    <div class="relative h-[450px] grid-cols-4 grid-rows-3 gap-3 lg:grid">
+      {
+        decorSquares.map((_, i) => (
+          <div class="decor-square rounded-xl" />
+        ))
+      }
 
-  <div class="relative mx-auto grid h-full max-w-6xl grid-cols-1 items-center gap-14 px-6 lg:grid-cols-2 lg:gap-10">
-      <div>
-        <h2 class="font-raleway text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
-          Cartec <span class="font-raleway text-brand-blue">Sub-Divisions</span>
+      
+      <div class="decor-fade pointer-events-none absolute inset-0"></div>
+
+      <!-- Text sits on top of the grid -->
+      <div class="absolute inset-0 flex items-center justify-center px-8">
+        <div class="max-w-xs text-left">
+        <h2 class="text-2xl  text-ink">
+          Our <span class="bg-gradient-to-r from-[#777777] to-[#b0b0b0] bg-clip-text text-3xl font-bold  text-transparent sm:text-4xl">Valuable Clients</span>
         </h2>
-        <p class="mt-2 text-lg text-muted">Sample sub-heading text</p>
-
-        <ul class="mt-10 space-y-8">
-          {divisions.map((division, i) => (
-            <li
-              class:list={['sub-item', 'border-l-2', 'pl-5', { active: i === 0 }]}
-              data-step={i}
-              data-bg={division.backgroundImage}
-              data-overlay={division.overlayImage}
-            >
-              <h3 class="sub-item-title text-lg font-bold text-ink">{division.title}</h3>
-              <p class="mt-1.5 text-sm leading-relaxed text-body">{division.description}</p>
-            </li>
-          ))}
-        </ul>
+        <p class="mt-2 text-sm text-body">
+          Supporting businesses across Sri Lanka with quality equipment they can count on.
+        </p>
       </div>
+    </div>
+    </div>
 
-     <div class="relative h-full w-full overflow-hidden">
-      <img
-        id="division-bg"
-        src={divisions[0].backgroundImage}
-        alt=""
-        class="absolute inset-0 h-full w-full object-cover"
-        aria-hidden="true"
-      />
+  
+    
 
-      <div class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white to-transparent" aria-hidden="true"></div>
-
-      <img
-        id="division-overlay"
-        src={divisions[0].overlayImage}
-        alt="Featured partner"
-        class="absolute left-1/2 top-1/2 w-56 -translate-x-1/2 -translate-y-1/2 sm:w-64"
-      />
+    <!-- Right side expanding client cards -->
+    <div class="client-row flex h-[450px] gap-2 overflow-hidden">
+      {
+        clients.map((client, index) => (
+          <div
+            class="client-card relative overflow-hidden rounded-2xl bg-black"
+            data-first={index === 0}
+          >
+            <img src={client.logo} alt={client.name} class="client-logo" />
+            <span class="client-name">{client.name}</span>
+          </div>
+        ))
+      }
     </div>
   </div>
-</div>
 </section>
 
-<script>
-  const section = document.getElementById('about');
-  const items = document.querySelectorAll('.sub-item');
-  const bgImage = document.getElementById('division-bg');
-  const overlayImage = document.getElementById('division-overlay');
-
-  if (section && items.length) {
-    const stepCount = items.length;
-    let currentStep = 0;
-
-    function activate(index) {
-      items.forEach((el) => el.classList.remove('active'));
-      const item = items[index];
-      item.classList.add('active');
-
-      bgImage.src = item.getAttribute('data-bg');
-      overlayImage.src = item.getAttribute('data-overlay');
-    }
-
-    window.addEventListener('scroll', () => {
-      const rect = section.getBoundingClientRect();
-      
-      const scrolledPast = -rect.top;
-      const scrollableDistance = section.offsetHeight - window.innerHeight;
-      
-      let progress = scrolledPast / scrollableDistance;
-      progress = Math.max(0, Math.min(1, progress));
-
-      let step = Math.floor(progress * stepCount);
-      step = Math.min(step, stepCount - 1);
-
-      if (step !== currentStep) {
-        currentStep = step;
-        activate(step);
-      }
-    });
-  }
-</script>
-
 <style>
-  .plus-bg-red {
-    background-image: url('/Plus_symbol.svg.webp');
-    background-repeat: repeat;
-    background-size: 63px 63px;
-    opacity: 0.03;
+  /* background squares */
+  .decor-square {
+    background: #e4e3e3;
   }
 
-  .sub-item {
-    border-color: #e6e6ea;
-    transition: border-color 0.3s ease, text-shadow 0.3s;
+  /*  squares fade*/
+  .decor-fade {
+    background: linear-gradient(
+      to bottom,
+      #f2f2f2 0%,
+      transparent 20%,
+      transparent 80%,
+      #f2f2f2 100%
+    );
   }
 
-  .sub-item-title {
-    transition: text-shadow 0.3s;
+  
+  .client-card {
+    flex: 1 1 0;
+    min-width: 70px;
+    transition: flex-grow 0.5s ease;
+    background: #05070d;
   }
 
-  .sub-item.active {
-    border-color: #e62117;
+  /* First card starts wider than the rest */
+  .client-card[data-first='true'] {
+    flex-grow: 2;
   }
 
-  .sub-item.active .sub-item-title {
-    color: #111111;
-    font-weight: 800;
+  
+  .client-row:hover .client-card[data-first='true']:not(:hover) {
+    flex-grow: 1;
+    background: #05070d;
   }
 
-  #division-bg,
-  #division-overlay {
+  .client-card:hover,
+  .client-card[data-first='true'] {
+    background-image: url('/blue_gradient_stripes.svg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .client-card:hover {
+    flex-grow: 2;
+  }
+
+  
+  .client-logo {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    height: 28px;
+    width: auto;
+    max-width: 60%;
+    opacity: 0.7;
+    transition: height 0.5s ease, opacity 0.5s ease;
+  }
+  .client-card:hover .client-logo,
+  .client-card[data-first='true'] .client-logo {
+    height: 72px;
+    opacity: 1;
+  }
+
+  /* Name label , hidden by default */
+  .client-name {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: white;
+    opacity: 0;
     transition: opacity 0.3s ease;
   }
+  .client-card:hover .client-name,
+  .client-card[data-first='true'] .client-name {
+    opacity: 1;
+  }
 </style>
-
-

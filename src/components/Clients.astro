@@ -1,5 +1,5 @@
 ---
-const clients = [
+const partners = [
   { name: 'Sunshine', logo: '/sunshine.svg' },
   { name: 'Toyota', logo: '/toyota-logo-png-30 1.svg' },
   { name: 'Jaguar', logo: '/Jaguar-Logo-PNG 1.svg' },
@@ -8,33 +8,29 @@ const clients = [
   { name: 'DPMC', logo: '/DPMC.svg' },
 ];
 
-const oneSlide = [...clients, ...clients, ...clients];
+
+const oneSlide = [...partners, ...partners, ...partners];
 ---
 
-<section id="projects" class="relative overflow-hidden py-20 text-white lg:py-24">
-  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-    <img src="/logo background.svg" alt="" class="h-full w-full object-cover" />
-  </div>
-
-  <div class="relative mx-auto max-w-6xl px-6 text-center">
-    <h2 class="font-raleway text-3xl font-extrabold tracking-tight sm:text-4xl">Our Valuable Clients</h2>
-    <p class="mt-2 text-lg text-white/60">Sample sub-heading text</p>
-  </div>
-
-  <div class="logos relative mt-14">
+<section class="overflow-hidden py-10">
+  <div class="logos relative">
     <div class="logos-slide">
-      {oneSlide.map((client) => (
-        <span class="logo-item">
-          <img src={client.logo} alt={client.name} />
-        </span>
-      ))}
+      {
+        oneSlide.map((partner) => (
+          <span class="logo-item">
+            <img src={partner.logo} alt={partner.name} />
+          </span>
+        ))
+      }
     </div>
-    <div class="logos-slide">
-      {oneSlide.map((client) => (
-        <span class="logo-item">
-          <img src={client.logo} alt={client.name} />
-        </span>
-      ))}
+    <div class="logos-slide" aria-hidden="true">
+      {
+        oneSlide.map((partner) => (
+          <span class="logo-item">
+            <img src={partner.logo} alt={partner.name} />
+          </span>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -56,48 +52,28 @@ const oneSlide = [...clients, ...clients, ...clients];
 
   .logos-slide {
     display: inline-block;
-    animation: slide 45s linear infinite;
+    animation: slide 40s linear infinite;
   }
 
-  .logo-item:hover img {
-  transform: scale(1.15);
-}
-
-  
   .logo-item {
-    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 280px;
+    width: 180px;
   }
 
   .logo-item img {
-    height: 110px;
+    height: 48px;
     width: auto;
     max-width: 140px;
     object-fit: contain;
     display: inline-block;
     vertical-align: middle;
-    transition: transform 0.3s ease;
+    filter: brightness(0);
+    opacity: 0.85;
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
   
-
-  .logo-item::before,
-.logo-item::after {
-  content: '';
-  position: absolute;
-  top: -2px;
-  bottom: -2px;
-  width: 2px;
-  background: rgba(255, 255, 255, 0.15);
-  clip-path: polygon(50% 0%, 100% 18%, 100% 82%, 50% 100%, 0% 82%, 0% 18%);
-}
-  .logo-item::before {
-    left: 0;
-  }
-  .logo-item::after {
-    left: 8px;
-  }
+  
 </style>

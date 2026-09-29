@@ -1,5 +1,5 @@
 ﻿---
-const divisions = [
+const tabs = [
   {
     title: 'Workshop equipment',
     description:
@@ -20,17 +20,16 @@ const divisions = [
   },
 ];
 ---
-
 <section id="home" class="px-4 pb-6 lg:px-8">
   <div class="mx-auto grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-2">
-
+ 
     <!-- Left card -->
     <div class="flex flex-col justify-between rounded-2xl bg-white p-8 lg:p-10">
       <div>
         <h1 class="text-3xl font-medium leading-tight text-ink sm:text-4xl">
           Workshop Equipment
         </h1>
-        <h2 class="text-3xl font-extrabold leading-tight text-ink/40 sm:text-4xl">
+        <h2 class="bg-gradient-to-r from-[#777777] to-[#b0b0b0] bg-clip-text text-3xl font-bold  text-transparent sm:text-4xl">
           You Can Count On
         </h2>
         <p class="mt-4 max-w-md text-sm leading-relaxed text-body">
@@ -38,29 +37,27 @@ const divisions = [
           tools - serving Sri Lanka's workshops since 1999.
         </p>
         <div class="mt-6 flex flex-wrap items-center gap-3">
-          <a href="/contact" class="rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-800">
+          <a href="/contact" class="contact-btn rounded-2xl px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90">
             Contact Us
           </a>
-          <a href="/products" class="rounded-full border border-ink/20 px-5 py-2.5 text-sm font-semibold text-ink hover:border-ink/40">
+          <a href="/products" class="rounded-2xl border border-ink/20 px-5 py-2.5 text-sm font-semibold text-ink hover:border-ink/40">
             View our products
           </a>
         </div>
       </div>
-
-      
-
+ 
       <ul class="mt-10 space-y-3">
         {
-          divisions.map((division, index) => (
+          tabs.map((tab, index) => (
             <li>
               <button
                 type="button"
-                class="division-card w-full rounded-xl border border-ink/10 px-5 py-3.5 text-left"
+                class="tab-card w-full rounded-xl border border-ink/10 px-5 py-3.5 text-left"
                 data-index={index}
               >
-                <span class="block text-sm font-bold">{division.title}</span>
+                <span class="block text-sm font-bold">{tab.title}</span>
                 <span class="mt-1 block text-xs leading-relaxed opacity-70">
-                  {division.description}
+                  {tab.description}
                 </span>
               </button>
             </li>
@@ -68,23 +65,23 @@ const divisions = [
         }
       </ul>
     </div>
-
-    <!-- image showcase -->
+ 
+    <!-- Image showcase -->
     <div class="relative min-h-[420px] overflow-hidden rounded-2xl bg-black lg:min-h-0">
       {
-        divisions.map((division, index) => (
+        tabs.map((tab, index) => (
           <img
-            src={division.image}
-            alt={division.title}
-            class="hero-image absolute inset-0 h-full w-full object-cover"
+            src={tab.image}
+            alt={tab.title}
+            class="tab-image absolute inset-0 h-full w-full object-cover"
             data-index={index}
           />
         ))
       }
-
+ 
       <div class="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-1.5">
         {
-          divisions.map((_, index) => (
+          tabs.map((_, index) => (
             <span class="dot h-1.5 w-1.5 rounded-full bg-white/40" data-index={index} />
           ))
         }
@@ -92,46 +89,46 @@ const divisions = [
     </div>
   </div>
 </section>
-
+ 
 <style>
-  .division-card.active {
+
+  .contact-btn {
+  background: linear-gradient(100deg, #0a1a3f 0%, #0a0a0a 50%, #3a0f10 100%);
+}
+
+  .tab-card.active {
     background: black;
     color: white;
   }
-
-  .hero-image {
+ 
+  .tab-image {
     opacity: 0;
     transition: opacity 0.4s ease;
   }
-  .hero-image.active {
+  .tab-image.active {
     opacity: 1;
   }
-
+ 
   .dot {
     transition: all 0.2s ease;
   }
-  .dot.active {
-    width: 1rem;
-    background: white;
-  }
+ 
 </style>
-
+ 
 <script>
-  const cards = document.querySelectorAll('.division-card');
-
+  const cards = document.querySelectorAll('.tab-card');
+ 
   function activate(index: string) {
-    // clear every active class, then set the ones matching this index
     document.querySelectorAll('.active').forEach((el) => el.classList.remove('active'));
-
-    document.querySelector(`.division-card[data-index="${index}"]`)?.classList.add('active');
-    document.querySelector(`.hero-image[data-index="${index}"]`)?.classList.add('active');
+ 
+    document.querySelector(`.tab-card[data-index="${index}"]`)?.classList.add('active');
+    document.querySelector(`.tab-image[data-index="${index}"]`)?.classList.add('active');
     document.querySelector(`.dot[data-index="${index}"]`)?.classList.add('active');
   }
-
+ 
   cards.forEach((card) => {
     card.addEventListener('mouseenter', () => activate(card.getAttribute('data-index')!));
   });
-
-  // start with the first card active
+ 
   activate('0');
 </script>
