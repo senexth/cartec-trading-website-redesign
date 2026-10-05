@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import bydLogo from '../assets/Group.png';
+import toyotaLogo from '../assets/toyota-logo-png-30 1.svg';
+import jaguarLogo from '../assets/Jaguar-Logo-PNG 1.svg';
+import jacLogo from '../assets/jac-motors-logo 1.png';
+import landRoverLogo from '../assets/landrover.svg';
+import dpmcLogo from '../assets/DPMC.svg';
+
+const partners = [
+  { name: 'BYD', logo: bydLogo, width: 100 },
+  { name: 'Toyota', logo: toyotaLogo, width: 150 },
+  { name: 'Jaguar', logo: jaguarLogo, width: 120 },
+  { name: 'JAC', logo: jacLogo, width: 75 },
+  { name: 'Land Rover', logo: landRoverLogo, width: 95 },
+  { name: 'DPMC', logo: dpmcLogo, width: 110 },
+];
+
+
+const oneSlide = [...partners, ...partners, ...partners];
+---
+
+<section class="overflow-hidden py-10">
+  <div class="logos relative">
+    <div class="logos-slide">
+      {
+        oneSlide.map((partner) => (
+          <span class="logo-item">
+            {partner.logo.format === 'svg' ? (
+              <img src={partner.logo.src} alt={partner.name} style={`width: ${partner.width}px`} />
+            ) : (
+              <Image src={partner.logo} alt={partner.name} style={`width: ${partner.width}px`} />
+            )}
+          </span>
+        ))
+      }
+    </div>
+    <div class="logos-slide" aria-hidden="true">
+      {
+        oneSlide.map((partner) => (
+          <span class="logo-item">
+            {partner.logo.format === 'svg' ? (
+              <img src={partner.logo.src} alt={partner.name} style={`width: ${partner.width}px`} />
+            ) : (
+              <Image src={partner.logo} alt={partner.name} style={`width: ${partner.width}px`} />
+            )}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes slide {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .logos {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .logos-slide {
+    display: inline-block;
+    animation: slide 40s linear infinite;
+  }
+
+  .logo-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+  }
+
+  .logo-item img {
+    height: 48px;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle;
+    filter: brightness(0);
+    opacity: 0.85;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  
+  
+</style>

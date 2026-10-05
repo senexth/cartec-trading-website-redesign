@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+
+const postsResponse = await fetch('https://jsonplaceholder.typicode.com/posts');
+const posts = await postsResponse.json();
+
+const albumsResponse = await fetch('https://jsonplaceholder.typicode.com/albums');
+const albums = await albumsResponse.json();
+
+const photosResponse = await fetch('https://jsonplaceholder.typicode.com/photos');
+const photos = await photosResponse.json();
+---
+
+<Layout title="Blog-Cartec">
+  
+
+  <main class="mx-auto  px-6 py-16 ">
+    <h1 class="text-3xl font-extrabold ">Blog</h1>
+
+    <div class="mt-10 grid = gap-8  lg:grid-cols-3">
+      {posts.map((post) => {
+        const album = albums[post.id % albums.length];
+        const photo = photos.find((p) => p.albumId === album.id);
+
+        return (
+          <card class="overflow-hidden rounded-xl border border-hairline">
+            <img src={`https://picsum.photos/seed/${post.id}/600/400`} alt={photo.title} class="h-44 w-full object-cover" />
+            <div class="p-5">
+              <h2 class="text-lg font-bold text-ink">{post.title}</h2>
+              <p class="mt-2 text-sm leading-relaxed text-body">{post.body}</p>
+            </div>
+          </card>
+        );
+      })}
+    </div>
+  </main>
+
+  
+</Layout>

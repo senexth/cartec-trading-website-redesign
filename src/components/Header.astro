@@ -1,0 +1,62 @@
+---
+import logo from '../assets/image 1.svg';
+
+const navLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Products', href: '/products' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'News', href: '/news' },
+  { label: 'Services', href: '/services' },
+];
+
+const currentPath = Astro.url.pathname;
+
+const isActive = (href: string) => {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+};
+---
+
+<header class="relative z-20 px-4 py-4 lg:px-8">
+  <div
+    class="mx-auto flex max-w-7xl items-center justify-between rounded-2xl bg-white px-6 py-0.5 shadow-sm lg:px-8"
+  >
+    <a href="/" class="flex items-center gap-2" aria-label="Cartec Trading home">
+      <img src={logo.src} alt="Cartec Trading" class="h-auto w-36" />
+    </a>
+
+    <nav class="hidden items-center gap-9 lg:flex" aria-label="Primary">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class={
+            isActive(link.href)
+              ? 'text-sm font-bold text-black transition-colors'
+              : 'text-sm font-medium text-ink/60 transition-colors hover:text-black'
+          }
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <a
+      href="/contact"
+      class="hidden items-center gap-2 rounded-[8px] bg-black px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800 lg:inline-flex"
+    >
+      Contact Us
+    </a>
+
+    <button
+      type="button"
+      class="inline-flex items-center justify-center rounded-md p-2 text-ink lg:hidden"
+      aria-label="Open menu"
+      id="menu-toggle"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+      </svg>
+    </button>
+  </div>
+</header>

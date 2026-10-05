@@ -1,0 +1,68 @@
+---
+import { Image } from 'astro:assets';
+import footerCar from '../assets/footer car img.png';
+
+const currentYear = new Date().getFullYear();
+
+const footerLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Products', href: '/products' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'News', href: '/news' },
+  { label: 'Services', href: '/services' },
+];
+---
+
+<footer id="contact" class="px-4 pb-4 lg:px-8">
+  <div class="group relative mx-auto flex min-h-[420px] max-w-7xl flex-col justify-between overflow-hidden rounded-2xl bg-white p-8 lg:p-10">
+
+    
+    <div class="pointer-events-none absolute inset-y-0 right-0 w-full opacity-30 lg:w-1/2 lg:opacity-100">
+      <Image
+        src={footerCar}
+        alt=""
+        class="h-full w-full scale-100 object-contain object-right-bottom grayscale transition-all duration-700 ease-out group-hover:translate-x-4 group-hover:scale-95 group-hover:grayscale-0"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-white to-transparent transition-opacity duration-700 ease-out group-hover:opacity-0"></div>
+    </div>
+
+    <!-- Top: heading + arrow button -->
+    <div class="relative flex items-center gap-5">
+      <h2 class="bg-gradient-to-r from-[#1b2a5c] to-[#6ec1ff] bg-clip-text text-3xl font-semibold text-transparent sm:text-4xl">
+        Contact us for inquiries
+      </h2>
+      <a
+        href="/contact"
+        aria-label="Contact us"
+        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-ink text-ink transition-colors hover:bg-ink hover:text-white sm:h-16 sm:w-16"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Bottom: links + copyright -->
+    <div class="relative mt-24">
+      <nav aria-label="Footer" class="flex max-w-[500px] flex-wrap gap-x-8 gap-y-2 border-b border-ink pb-3">
+        {
+          footerLinks.map((link) => (
+            <a href={link.href} class="text-sm text-ink hover:opacity-60">
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <p class="mt-8 text-xs text-ink">
+        Copyright &copy;{currentYear} Cartec Trading. All rights reserved.
+      </p>
+    </div>
+
+    <!-- Designed-by pill -->
+    <p class="absolute bottom-8 right-8 rounded-full bg-gradient-to-b from-[#5a5a5a] to-[#111] px-5 py-1.5 text-xs text-white lg:bottom-8 lg:right-10">
+      Designed by <span class="font-bold">TWC Innovations</span>
+    </p>
+  </div>
+</footer>
